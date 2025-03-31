@@ -8,3 +8,6 @@ class routineModel(models.Model):
  create_at=models.TimeField(auto_now_add=True, verbose_name='作成日時')
  url=models.URLField(null=True, blank=True, verbose_name='URL')
  notice_text=models.TextField(max_length=400, verbose_name='通知内容')
+
+ def __str__(self):
+  return super().__str__()
