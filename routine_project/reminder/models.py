@@ -10,4 +10,4 @@ class routineModel(models.Model):
  notice_text=models.TextField(max_length=400, verbose_name='通知内容')
 
  def __str__(self):
-  return super().__str__()
+  return f"{self.title} ({self.period}日ごと)"
