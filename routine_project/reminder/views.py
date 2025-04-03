@@ -28,7 +28,7 @@ class PageCreateView(View):
 
 class PageListView(View):
   def get(self, request):
-    page_list = routineModel.objects.order_by('create_at')
+    page_list = routineModel.objects.order_by('-create_at')
     return render(request, "reminder/page_list.html", {"page_list": page_list} )
 
 class PageDeleteView(View):
