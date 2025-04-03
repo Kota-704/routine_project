@@ -4,7 +4,7 @@
 {% for routineModel in page_list %}
 <hr />
 <div class="flex routine_list_layout">
-  <p>{{ routineModel.id }} - {{ routineModel.title }}</p>
+  <p>{{ routineModel.title }}</p>
   <a href="{% url 'reminder:page_detail' routineModel.id %}" class="detail_link"
     >詳細</a
   >
