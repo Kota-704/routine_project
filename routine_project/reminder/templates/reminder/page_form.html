@@ -1,8 +1,9 @@
 {% extends "base/reminder_base.html" %} {% block body %}
-<h2>ルーチンを登録する</h2>
+<h2 class="register_heading">ルーチンを登録する</h2>
 <form method="POST">
   {% csrf_token %} {{ form.as_p }}
   <div class="button_wrapper">
+    <a href="{% url 'reminder:page_list' %}">キャンセル</a>
     <button type="submit" class="update_button">保存</button>
   </div>
 </form>
