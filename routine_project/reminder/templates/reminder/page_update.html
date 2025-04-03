@@ -1,0 +1,11 @@
+{% extends "base/reminder_base.html" %} {% block body %}
+
+<h2>ルーチンを更新する</h2>
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <div class="button_wrapper">
+    <button type="submit" class="update_button">更新</button>
+  </div>
+</form>
+
+{% endblock %}

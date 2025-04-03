@@ -1,12 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/reset.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
     <title>ルーチンワーク</title>
   </head>
   <body>
-    <h1><a href="{% url 'reminder:index' %}">ルーチン管理アプリ</a></h1>
-    {% block body %} {% endblock %}
+    <div class="wrapper w_1280">
+      <h1 class="app_head">
+        <a href="{% url 'reminder:index' %}" class="app_head"
+          >ルーチン管理アプリ</a
+        >
+      </h1>
+      {% block body %} {% endblock %}
+    </div>
   </body>
 </html>

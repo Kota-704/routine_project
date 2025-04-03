@@ -1,0 +1,12 @@
+{% extends "base/reminder_base.html" %} {% block body %}
+
+<h3>{{ page.id }} - {{ page.title }}</h3>
+
+<p>{{ page.created_at }}</p>
+<p>周期：{{ page.period }}日</p>
+<a href="{{ page.url }}">予約URL</a>
+<p>{{ page.notice_text|safe }}</p>
+<a href="{% url 'reminder:page_update' page.id %}">変更</a>
+<a href="{% url 'reminder:page_list' %}">戻る</a>
+
+{% endblock %}
