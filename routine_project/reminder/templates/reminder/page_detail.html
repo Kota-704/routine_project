@@ -4,7 +4,9 @@
 
 <p>{{ page.created_at }}</p>
 <p>周期：{{ page.period }}日</p>
+<p>開始日時: {{ page.start_date }}</p>
 <a href="{{ page.url }}">予約URL</a>
+<p>通知内容：</p>
 <p>{{ page.notice_text|safe }}</p>
 <a href="{% url 'reminder:page_update' page.id %}">変更</a>
 <a href="{% url 'reminder:page_list' %}">戻る</a>

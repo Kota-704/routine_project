@@ -4,6 +4,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from reminder.forms import PageForm
 from reminder.models import routineModel
+from .utils import get_next_date, get_days_left
 
 
 
@@ -29,7 +30,19 @@ class PageCreateView(View):
 class PageListView(View):
   def get(self, request):
     page_list = routineModel.objects.order_by('-create_at')
-    return render(request, "reminder/page_list.html", {"page_list": page_list} )
+    enriched = []
+    for page in page_list:
+      next_date = get_next_date(page.start_date, page.period)
+      if next_date:
+        next_date_str = next_date.strftime("%Y年%m月%d日")
+      else:
+        next_date_str = "未定"
+
+      enriched.append({
+        "page": page,
+        "next_date": next_date_str
+      })
+    return render(request, "reminder/page_list.html", {"page_list": enriched})
 
 class PageDeleteView(View):
   def get(self, request, id):
