@@ -4,18 +4,19 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from reminder.forms import PageForm
 from reminder.models import routineModel
-from .utils import get_next_date, get_days_left
+from .utils import get_next_date
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-class IndexView(View):
+class IndexView(LoginRequiredMixin, View):
   def get(self, request):
     datetime_now = datetime.now(
       ZoneInfo("Asia/Tokyo")
     ).strftime("%Y年%m月%d日")
     return render(request, "reminder/index.html", {"datetime_now": datetime_now})
 
-class PageCreateView(View):
+class PageCreateView(LoginRequiredMixin, View):
   def get(self, request):
     form = PageForm()
     return render(request, "reminder/page_form.html", {"form": form})
@@ -27,7 +28,7 @@ class PageCreateView(View):
       return redirect("reminder:index")
     return render(request, "reminder/page_form.html", {"form": form})
 
-class PageListView(View):
+class PageListView(LoginRequiredMixin, View):
   def get(self, request):
     page_list = routineModel.objects.order_by('-create_at')
     enriched = []
@@ -46,7 +47,7 @@ class PageListView(View):
       })
     return render(request, "reminder/page_list.html", {"page_list": enriched})
 
-class PageDeleteView(View):
+class PageDeleteView(LoginRequiredMixin, View):
   def get(self, request, id):
     page = get_object_or_404(routineModel, id=id)
     return render(request, "reminder/page_delete.html", {"page" : page})
@@ -55,7 +56,7 @@ class PageDeleteView(View):
     page.delete()
     return redirect('reminder:page_list')
 
-class PageUpdateView(View):
+class PageUpdateView(LoginRequiredMixin, View):
   def get(self, request, id):
     page = get_object_or_404(routineModel, id=id)
     form = PageForm(instance=page)
@@ -68,7 +69,7 @@ class PageUpdateView(View):
       return redirect('reminder:page_detail', id=page.id)
     return render(request, 'reminder/page_update.html', {"form": form, "page": page})
 
-class PageDetailView(View):
+class PageDetailView(LoginRequiredMixin, View):
   def get(self, request, id):
     page = get_object_or_404(routineModel, id=id)
     return render(request, 'reminder/page_detail.html', {"page": page})
