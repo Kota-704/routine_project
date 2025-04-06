@@ -33,14 +33,16 @@ class PageListView(View):
     enriched = []
     for page in page_list:
       next_date = get_next_date(page.start_date, page.period)
+      start_date_str = page.start_date.strftime("%Y年%m月%d日")
       if next_date:
         next_date_str = next_date.strftime("%Y年%m月%d日")
       else:
-        next_date_str = "未定"
+        next_date_str = "なし"
 
       enriched.append({
         "page": page,
-        "next_date": next_date_str
+        "next_date": next_date_str,
+        "start_date": start_date_str
       })
     return render(request, "reminder/page_list.html", {"page_list": enriched})
 

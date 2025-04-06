@@ -7,7 +7,7 @@
 <div class="flex routine_list_layout">
   <div class="routine_list">
     <p>{{ item.page.title }}</p>
-    <p>開始日時: {{ item.page.start_date }}</p>
+    <p>開始日時: {{ item.start_date }}</p>
     <p>次回：{{ item.next_date }}</p>
   </div>
   <a href="{% url 'reminder:page_detail' item.page.id %}" class="detail_link"
